@@ -8,18 +8,18 @@
   --sky-top: #c7ebff;
   --sky-mid: #90d7ff;
   --sky-bottom: #f8e4a8;
-  --sun-glow: rgba(255, 210, 102, 0.65);
-  --text-light: #ffffff;
-  --text-dark: #18324b;
-  --text-gray: #456179;
+
+  --text-dark: #163049;
+  --text-gray: #355068;
+  --text-soft: #4f6b82;
+  --text-inverse: #ffffff;
+
   --glass-bg: rgba(255, 255, 255, 0.2);
   --glass-border: rgba(255, 255, 255, 0.35);
   --shadow-color: rgba(42, 78, 112, 0.12);
   --accent-blue: #2b6cb0;
   --card-bg: rgba(255, 255, 255, 0.12);
   --modal-bg: rgba(252, 255, 255, 0.95);
-  --modal-dark-bg: rgba(12, 19, 33, 0.96);
-  --page-glow: rgba(255, 255, 255, 0.45);
 
   --spacing-xs: 4px;
   --spacing-sm: 8px;
@@ -68,8 +68,8 @@ body {
   overflow-x: hidden;
   color: var(--text-dark);
   background:
-    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.95) 0, rgba(255,255,255,0.45) 10%, transparent 24%),
-    radial-gradient(circle at 84% 20%, var(--sun-glow) 0, rgba(255, 221, 140, 0.35) 12%, transparent 28%),
+    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.95) 0, rgba(255, 255, 255, 0.45) 10%, transparent 24%),
+    radial-gradient(circle at 84% 20%, rgba(255, 210, 102, 0.65) 0, rgba(255, 221, 140, 0.35) 12%, transparent 28%),
     linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 48%, var(--sky-bottom) 100%);
   transition: background var(--transition-slow), color var(--transition-base);
 }
@@ -78,21 +78,21 @@ body.dark-mode {
   --sky-top: #07111f;
   --sky-mid: #102544;
   --sky-bottom: #1a2036;
-  --sun-glow: rgba(170, 198, 255, 0.25);
-  --text-light: #f8fbff;
-  --text-dark: #eff5ff;
-  --text-gray: #c7d5e6;
+
+  --text-dark: #f4f8ff;
+  --text-gray: #d6e2f0;
+  --text-soft: #afc2d6;
+  --text-inverse: #08111d;
+
   --glass-bg: rgba(9, 16, 29, 0.56);
   --glass-border: rgba(175, 199, 255, 0.15);
   --shadow-color: rgba(0, 0, 0, 0.35);
   --accent-blue: #7ab8ff;
   --card-bg: rgba(255, 255, 255, 0.05);
   --modal-bg: rgba(11, 17, 29, 0.96);
-  --modal-dark-bg: rgba(6, 10, 18, 0.98);
-  --page-glow: rgba(86, 122, 187, 0.18);
 
   background:
-    radial-gradient(circle at 15% 14%, rgba(255,255,255,0.12) 0, transparent 18%),
+    radial-gradient(circle at 15% 14%, rgba(255, 255, 255, 0.12) 0, transparent 18%),
     radial-gradient(circle at 82% 18%, rgba(215, 227, 255, 0.16) 0, transparent 14%),
     linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 50%, var(--sky-bottom) 100%);
 }
@@ -127,5 +127,5 @@ a {
 
 ::selection {
   background: var(--accent-blue);
-  color: var(--text-light);
+  color: var(--text-inverse);
 }
