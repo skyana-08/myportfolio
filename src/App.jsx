@@ -35,6 +35,7 @@ function App() {
 
   useEffect(() => {
     const media = window.matchMedia('(prefers-color-scheme: dark)')
+
     const applyTheme = (dark) => {
       setIsDarkMode(dark)
       document.documentElement.classList.toggle('dark-mode', dark)
@@ -348,7 +349,14 @@ function App() {
               <div className="additional-competencies">
                 <h3>Additional Competencies</h3>
                 <div className="additional-tags">
-                  {['Team Collaboration', 'Communication', 'Project Management', 'Time Management', 'Attention to Detail', 'Adaptability'].map((skill, index) => (
+                  {[
+                    'Team Collaboration',
+                    'Communication',
+                    'Project Management',
+                    'Time Management',
+                    'Attention to Detail',
+                    'Adaptability',
+                  ].map((skill, index) => (
                     <span key={index} className="project-tag">
                       {skill}
                     </span>
