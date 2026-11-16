@@ -1,18 +1,15 @@
 import { Moon, Sun } from 'lucide-react'
-import '../App.css'
 
-const ThemeToggle = ({ isDarkMode, toggleTheme }) => {
-  return (
-    <button
-      className={`theme-toggle ${isDarkMode ? 'dark' : 'light'}`}
-      onClick={toggleTheme}
-      aria-label={isDarkMode ? 'Switch to morning mode' : 'Switch to night mode'}
-    >
-      <div className="toggle-circle">
-        {isDarkMode ? <Moon size={20} /> : <Sun size={20} />}
-      </div>
-    </button>
-  )
-}
+const ThemeToggle = ({ isDarkMode, toggleTheme }) => (
+  <button
+    type="button"
+    className="theme-toggle"
+    onClick={toggleTheme}
+    aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+  >
+    {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
+    {isDarkMode ? 'Light' : 'Dark'}
+  </button>
+)
 
 export default ThemeToggle
