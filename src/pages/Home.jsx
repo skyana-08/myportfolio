@@ -1,55 +1,52 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
-import '../App.css'
+import coverImage from '../assets/Tracked-studash.png'
 
-const Home = () => {
-  return (
-    <div className="home-page">
-      <div className="hero-section">
-        <h1 className="hero-title">Welcome to My Portfolio</h1>
-        <p className="hero-subtitle">Creative Designer & Developer</p>
-        <p className="hero-description">
-          I create beautiful, functional web applications with attention to detail 
-          and user experience. Explore my work and skills to see what I can bring to your project.
+const sections = [
+  { to: '/projects', title: 'Projects', text: 'TrackED, Ctrl + Alt + Delight and Edren Inventory, with screenshots.' },
+  { to: '/skills', title: 'Skills', text: 'Web development, Python, C++ and quality assurance.' },
+  { to: '/about', title: 'About', text: 'Background, education and a downloadable CV.' },
+  { to: '/contact', title: 'Contact', text: 'Email, LinkedIn and Facebook, plus a message form.' },
+]
+
+const Home = () => (
+  <>
+    <section className="cover">
+      <div>
+        <div className="kicker">Cover story</div>
+        <h1 className="cover-title">
+          Software that works, <i>tested until it does.</i>
+        </h1>
+        <p className="cover-deck">
+          I'm an Information Technology student specializing in quality assurance, with experience in both
+          backend testing and frontend validation. I build web applications, document defects, and care
+          about shipping reliable work.
         </p>
-        
-        <div className="hero-actions">
-          <Link to="/projects" className="primary-button">
-            View Projects <ArrowRight size={20} />
-          </Link>
-          <Link to="/contact" className="secondary-button">
-            Get in Touch
-          </Link>
+        <div className="btn-row">
+          <Link to="/projects" className="btn">View projects</Link>
+          <Link to="/contact" className="btn btn-ghost">Get in touch</Link>
         </div>
       </div>
-      
-      <div className="quick-links">
-        <div className="quick-link-card">
-          <h3>Recent Projects</h3>
-          <p>TrackED, Ctrl + Alt + Delight, Edren Inventory</p>
-          <Link to="/projects" className="link-button">
-            View All Projects →
-          </Link>
-        </div>
-        
-        <div className="quick-link-card">
-          <h3>My Skills</h3>
-          <p>Web Development, Python, C++, Quality Assurance</p>
-          <Link to="/skills" className="link-button">
-            Explore Skills →
-          </Link>
-        </div>
-        
-        <div className="quick-link-card">
-          <h3>About Me</h3>
-          <p>Learn more about my background and experience</p>
-          <Link to="/about" className="link-button">
-            About Me →
-          </Link>
-        </div>
-      </div>
-    </div>
-  )
-}
+
+      <figure className="cover-figure">
+        <img src={coverImage} alt="TrackED student dashboard" />
+        <figcaption>On the cover: the student dashboard from TrackED.</figcaption>
+      </figure>
+    </section>
+
+    <section className="toc" aria-labelledby="toc-title">
+      <h2 className="toc-title" id="toc-title">In this issue</h2>
+      <ul className="toc-list">
+        {sections.map((s) => (
+          <li key={s.to}>
+            <Link to={s.to} className="toc-row">
+              <h3>{s.title}</h3>
+              <p>{s.text}</p>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </>
+)
 
 export default Home
