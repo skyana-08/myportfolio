@@ -1,86 +1,81 @@
-import { ExternalLink } from 'lucide-react'
-import '../App.css'
+import trackedPrograd from '../assets/Tracked-prograd.png'
+import trackedStudash from '../assets/Tracked-studash.png'
+import trackedProdash from '../assets/Tracked-prodash.png'
+import trackedProanalytics from '../assets/Tracked-proanalytics.png'
+import projdash from '../assets/projdash.png'
+import projdash2 from '../assets/projdash2.png'
+import edrendash from '../assets/Edrendash.png'
+import edrenlog from '../assets/Edrenlog.png'
+import edreninven from '../assets/Edreninven.png'
 
-const Projects = () => {
-  const projects = [
-    {
-      title: "TrackED",
-      description: "A comprehensive educational platform with progress tracking, analytics, and dashboard features for students and professors.",
-      images: [
-        "/src/assets/Tracked-prograd.png",
-        "/src/assets/Tracked-studash.png", 
-        "/src/assets/Tracked-prodash.png",
-        "/src/assets/Tracked-proanalytics.png"
-      ],
-      tags: ["Web App", "Education", "Dashboard", "Analytics"]
-    },
-    {
-      title: "Ctrl + Alt + Delight",
-      description: "A project management dashboard with task tracking, team collaboration, and productivity analytics.",
-      images: [
-        "/src/assets/projdash.png",
-        "/src/assets/projdash2.png"
-      ],
-      tags: ["Dashboard", "Productivity", "Task Management"]
-    },
-    {
-      title: "Edren Inventory",
-      description: "Inventory management system with dashboard, login system, and inventory tracking features.",
-      images: [
-        "/src/assets/Edrendash.png",
-        "/src/assets/Edrenlog.png",
-        "/src/assets/Edreninven.png"
-      ],
-      tags: ["Inventory", "Management", "Dashboard", "Login System"]
-    }
-  ]
+const projects = [
+  {
+    title: 'TrackED',
+    description:
+      'A comprehensive educational platform with progress tracking, analytics, and dashboard features for students and professors.',
+    tags: ['Web app', 'Education', 'Dashboard', 'Analytics'],
+    images: [
+      { src: trackedPrograd, caption: 'Progress dashboard' },
+      { src: trackedStudash, caption: 'Student dashboard' },
+      { src: trackedProdash, caption: 'Professor dashboard' },
+      { src: trackedProanalytics, caption: 'Analytics dashboard' },
+    ],
+  },
+  {
+    title: 'Ctrl + Alt + Delight',
+    description:
+      'A project management dashboard with task tracking, team collaboration, and productivity analytics.',
+    tags: ['Dashboard', 'Productivity', 'Task management'],
+    images: [
+      { src: projdash, caption: 'Main dashboard' },
+      { src: projdash2, caption: 'Task and team view' },
+    ],
+  },
+  {
+    title: 'Edren Inventory',
+    description: 'Inventory management system with dashboard, login system, and inventory tracking features.',
+    tags: ['Inventory', 'Management', 'Dashboard', 'Login system'],
+    images: [
+      { src: edrendash, caption: 'Dashboard' },
+      { src: edrenlog, caption: 'Login screen' },
+      { src: edreninven, caption: 'Inventory management' },
+    ],
+  },
+]
 
-  return (
-    <div className="projects-page">
-      <h1 className="page-title">My Projects</h1>
-      <p className="page-subtitle">A showcase of my recent work and web applications</p>
-      
-      <div className="projects-grid">
-        {projects.map((project, index) => (
-          <div key={index} className="project-card">
-            <div className="project-header">
-              <h2 className="project-title">{project.title}</h2>
-              <div className="project-tags">
-                {project.tags.map((tag, tagIndex) => (
-                  <span key={tagIndex} className="project-tag">{tag}</span>
-                ))}
-              </div>
-            </div>
-            
-            <p className="project-description">{project.description}</p>
-            
-            <div className="project-images">
-              {project.images.map((image, imgIndex) => (
-                <div key={imgIndex} className="project-image-container">
-                  <img 
-                    src={image} 
-                    alt={`${project.title} screenshot ${imgIndex + 1}`}
-                    className="project-image"
-                    onError={(e) => {
-                      e.target.onerror = null
-                      e.target.src = "https://via.placeholder.com/400x250/1e7bb9/ffffff?text=Project+Image"
-                    }}
-                  />
-                </div>
-              ))}
-            </div>
-            
-            <div className="project-actions">
-              <button className="view-button">
-                <ExternalLink size={16} />
-                View Details
-              </button>
-            </div>
+const Projects = () => (
+  <>
+    <header className="page-head">
+      <div className="kicker">Features</div>
+      <h1 className="page-title">Projects</h1>
+      <p className="standfirst">Three web applications, each with the screens behind it. Select an image to view it full size.</p>
+    </header>
+
+    {projects.map((project) => (
+      <article key={project.title} className="feature">
+        <div className="feature-meta">
+          <h2 className="feature-title">{project.title}</h2>
+          <div className="tag-line">
+            {project.tags.map((tag) => (
+              <span key={tag}>{tag}</span>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
-  )
-}
+          <p className="feature-desc">{project.description}</p>
+        </div>
+
+        <div className="gallery">
+          {project.images.map((image) => (
+            <figure key={image.src}>
+              <a href={image.src} target="_blank" rel="noopener noreferrer">
+                <img src={image.src} alt={`${project.title}: ${image.caption}`} loading="lazy" />
+              </a>
+              <figcaption>{image.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </article>
+    ))}
+  </>
+)
 
 export default Projects
