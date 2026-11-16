@@ -1,120 +1,74 @@
-import { Download, User, Briefcase, GraduationCap, Award } from 'lucide-react'
-import '../App.css'
+import { Download } from 'lucide-react'
+import cvImage from '../assets/Bryle CV.jpeg'
+import cvPdf from '../assets/Bryle CV.pdf'
 
-const About = () => {
-  const cvImage = "/src/assets/Bryle CV.jpeg"
-  const cvPdf = "/src/assets/Bryle CV.pdf"
-  
-  const handleDownloadCV = () => {
-    // Create a temporary link to trigger download
-    const link = document.createElement('a')
-    link.href = cvPdf
-    link.download = 'Bryle_Balatayo_CV.pdf'
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
+const facts = [
+  { title: 'Experience', items: ['Web developer and designer', 'Quality assurance analyst', 'Project team collaboration'] },
+  { title: 'Education', items: ['BS Information Technology', 'Cavite State University – Imus Campus', 'Focus on web development and QA'] },
+  { title: 'Recognition', items: ['Capstone project', 'Academic recognition', 'Project implementation'] },
+]
 
-  const experiences = [
-    {
-      icon: Briefcase,
-      title: "Experience",
-      items: [
-        "Web Developer & Designer",
-        "Quality Assurance Analyst",
-        "Project Team Collaboration"
-      ]
-    },
-    {
-      icon: GraduationCap,
-      title: "Education",
-      items: [
-        "Bachelor's Degree in Information Technology",
-        "Specialization in Web Development",
-        "Continuous Learning & Skill Development"
-      ]
-    },
-    {
-      icon: Award,
-      title: "Achievements",
-      items: [
-        "Capstone Project Excellence",
-        "Academic Recognition",
-        "Project Implementation Success"
-      ]
-    }
-  ]
+const About = () => (
+  <>
+    <header className="page-head">
+      <div className="kicker">Profile</div>
+      <h1 className="page-title">About</h1>
+    </header>
 
-  return (
-    <div className="about-page">
-      <h1 className="page-title">About Me</h1>
-      <p className="page-subtitle">Get to know my background, experience, and qualifications</p>
-      
-      <div className="about-content">
-        <div className="cv-section">
-          <div className="cv-image-container">
-            <img 
-              src={cvImage} 
-              alt="Bryle Balatayo CV" 
-              className="cv-image"
-              onError={(e) => {
-                e.target.onerror = null
-                e.target.src = "https://via.placeholder.com/300x400/1e7bb9/ffffff?text=CV+Preview"
-              }}
-            />
-          </div>
-          
-          <div className="cv-details">
-            <h2>Brielle Edrian Balatayo</h2>
-            <p className="cv-title">Creative Designer & Developer</p>
-            
-            <div className="cv-highlights">
-              {experiences.map((exp, index) => (
-                <div key={index} className="highlight-item">
-                  <exp.icon size={20} className="highlight-icon" />
-                  <div>
-                    <h4>{exp.title}</h4>
-                    <ul>
-                      {exp.items.map((item, itemIndex) => (
-                        <li key={itemIndex}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              ))}
-            </div>
-            
-            <button onClick={handleDownloadCV} className="download-button">
-              <Download size={20} />
-              Download CV (PDF)
-            </button>
-            
-            <p className="download-note">
-              Click above to download my complete resume in PDF format.
-            </p>
-          </div>
+    <div className="about-grid">
+      <figure className="plate">
+        <img src={cvImage} alt="Preview of Bryle Balatayo's CV" />
+        <figcaption>Curriculum vitae preview.</figcaption>
+      </figure>
+
+      <div>
+        <h2 className="about-name">Brielle Edrian Balatayo</h2>
+        <p className="about-lede">
+          A detail-oriented Information Technology student specializing in quality assurance, experienced in
+          backend testing and frontend validation.
+        </p>
+
+        <div className="about-body">
+          <p>
+            I identify bugs, document defects, and help make sure software is reliable before it reaches
+            the people who use it. My interest began with curiosity about how things work, and grew into
+            building and testing web applications.
+          </p>
+          <p>
+            Through academic projects and my own exploration I have built skills in web development,
+            quality assurance and problem solving. I want the things I make to be technically sound and
+            pleasant to use.
+          </p>
+          <p>
+            Right now I'm deepening my knowledge of modern web technologies while keeping a firm focus on
+            clean code, user-centered design and thorough testing.
+          </p>
         </div>
-        
-        <div className="about-story">
-          <h3>My Journey</h3>
-          <p>
-            I'm a passionate designer and developer with a strong foundation in Information Technology. 
-            My journey began with a curiosity for how things work, which evolved into creating functional 
-            and beautiful web applications.
-          </p>
-          <p>
-            Through my academic projects and personal exploration, I've developed skills in web development, 
-            quality assurance, and problem-solving. I believe in creating solutions that are not only 
-            technically sound but also provide exceptional user experiences.
-          </p>
-          <p>
-            Currently, I'm focused on expanding my expertise in modern web technologies while maintaining 
-            a strong emphasis on clean code, user-centered design, and quality assurance practices.
-          </p>
+
+        <blockquote className="pull">Solutions that are technically sound and a pleasure to use.</blockquote>
+
+        <div className="facts">
+          {facts.map((fact) => (
+            <section key={fact.title} className="fact">
+              <h3>{fact.title}</h3>
+              <ul>
+                {fact.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+
+        <div className="btn-row">
+          <a href={cvPdf} download="Bryle_Balatayo_CV.pdf" className="btn">
+            <Download size={18} />
+            Download CV (PDF)
+          </a>
         </div>
       </div>
     </div>
-  )
-}
+  </>
+)
 
 export default About
