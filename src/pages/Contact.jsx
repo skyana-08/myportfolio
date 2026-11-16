@@ -1,114 +1,91 @@
-import { Mail, Linkedin, Facebook, Send } from 'lucide-react'
-import '../App.css'
+import { useState } from 'react'
+import { Send } from 'lucide-react'
+
+const EMAIL = 'brielleanabalatayo@gmail.com'
+
+const channels = [
+  { name: 'Email', text: EMAIL, href: `mailto:${EMAIL}`, external: false },
+  {
+    name: 'LinkedIn',
+    text: 'linkedin.com/in/brielle-edrian-balatayo',
+    href: 'https://www.linkedin.com/in/brielle-edrian-balatayo-1850a83a3',
+    external: true,
+  },
+  { name: 'Facebook', text: 'facebook.com/bryleana.balatayo', href: 'https://www.facebook.com/bryleana.balatayo', external: true },
+]
 
 const Contact = () => {
-  const socialLinks = [
-    {
-      platform: "Email",
-      icon: Mail,
-      link: "mailto:brielleanabalatayo@gmail.com",
-      text: "brielleanabalatayo@gmail.com",
-      color: "#EA4335"
-    },
-    {
-      platform: "LinkedIn",
-      icon: Linkedin,
-      link: "https://www.linkedin.com/in/brielle-edrian-balatayo-1850a83a3",
-      text: "linkedin.com/in/brielle-edrian-balatayo",
-      color: "#0077B5"
-    },
-    {
-      platform: "Facebook",
-      icon: Facebook,
-      link: "https://www.facebook.com/bryleana.balatayo",
-      text: "facebook.com/bryleana.balatayo",
-      color: "#1877F2"
-    }
-  ]
+  const [form, setForm] = useState({ name: '', email: '', message: '' })
 
-  const handleEmailClick = () => {
-    window.location.href = "mailto:brielleanabalatayo@gmail.com"
+  const update = (field) => (e) => setForm((prev) => ({ ...prev, [field]: e.target.value }))
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const subject = encodeURIComponent(`Portfolio inquiry from ${form.name}`)
+    const body = encodeURIComponent(`${form.message}\n\n${form.name}\n${form.email}`)
+    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`
   }
 
   return (
-    <div className="contact-page">
-      <h1 className="page-title">More About Me</h1>
-      <p className="page-subtitle">Let's connect! Feel free to reach out through any of these channels</p>
-      
-      <div className="contact-content">
-        <div className="social-links">
-          <h2>Connect With Me</h2>
-          <p className="contact-intro">
-            I'm always open to discussing new opportunities, creative projects, or just having a chat about technology and design.
-          </p>
-          
-          <div className="social-cards">
-            {socialLinks.map((social, index) => (
+    <>
+      <header className="page-head">
+        <div className="kicker">Letters</div>
+        <h1 className="page-title">Contact</h1>
+        <p className="standfirst">For opportunities, collaborations, or a conversation about technology and design.</p>
+      </header>
+
+      <div className="contact-grid">
+        <section>
+          <h2>Find me online</h2>
+          <div className="channels">
+            {channels.map((c) => (
               <a
-                key={index}
-                href={social.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-card"
-                style={{ '--social-color': social.color }}
+                key={c.name}
+                href={c.href}
+                className="channel"
+                {...(c.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
               >
-                <div className="social-icon-wrapper">
-                  <social.icon size={24} />
-                </div>
-                <div className="social-info">
-                  <h3>{social.platform}</h3>
-                  <p>{social.text}</p>
-                </div>
-                <Send size={16} className="send-icon" />
+                <span className="label">{c.name}</span>
+                <p>{c.text}</p>
               </a>
             ))}
           </div>
-        </div>
-        
-        <div className="contact-form-section">
-          <h2>Send a Message</h2>
-          <p>Prefer to send me a direct message? Use the form below:</p>
-          
-          <div className="contact-form">
-            <div className="form-group">
-              <label htmlFor="name">Your Name</label>
-              <input type="text" id="name" placeholder="Enter your name" />
-            </div>
-            
-            <div className="form-group">
-              <label htmlFor="email">Your Email</label>
-              <input type="email" id="email" placeholder="Enter your email" />
-            </div>
-            
-            <div className="form-group">
-              <label htmlFor="message">Your Message</label>
-              <textarea 
-                id="message" 
-                rows="5" 
-                placeholder="Type your message here..."
-              ></textarea>
-            </div>
-            
-            <button onClick={handleEmailClick} className="submit-button">
-              <Send size={18} />
-              Send Message via Email
-            </button>
-            
-            <p className="form-note">
-              This will open your default email client with a pre-filled message.
+
+          <div className="note">
+            <h3>Availability</h3>
+            <p>
+              Open to freelance projects, collaborations and full-time opportunities. I usually reply
+              within 24 hours.
             </p>
           </div>
-        </div>
+        </section>
+
+        <section>
+          <h2>Send a message</h2>
+          <form className="form" onSubmit={handleSubmit}>
+            <div className="field">
+              <label htmlFor="name">Your name</label>
+              <input id="name" type="text" autoComplete="name" required value={form.name} onChange={update('name')} />
+            </div>
+            <div className="field">
+              <label htmlFor="email">Your email</label>
+              <input id="email" type="email" autoComplete="email" required value={form.email} onChange={update('email')} />
+            </div>
+            <div className="field">
+              <label htmlFor="message">Message</label>
+              <textarea id="message" rows="6" required value={form.message} onChange={update('message')} />
+            </div>
+            <div>
+              <button type="submit" className="btn">
+                <Send size={18} />
+                Open in email app
+              </button>
+            </div>
+            <p className="form-note">This opens your email app with the message filled in. Nothing is sent until you press send there.</p>
+          </form>
+        </section>
       </div>
-      
-      <div className="availability">
-        <h3>Availability</h3>
-        <p>
-          I'm currently available for freelance projects, collaborations, and full-time opportunities. 
-          I typically respond to messages within 24 hours.
-        </p>
-      </div>
-    </div>
+    </>
   )
 }
 
